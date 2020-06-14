@@ -10,23 +10,18 @@ const Color colorActive = Color(0xFF1D1E33);
 const Color colorInactive = Color(0xFF111328);
 const Color bottomContainerColor = Color(0xFFEB1555);
 
+enum Gender {
+  male,
+  female,
+}
+
 class InputPage extends StatefulWidget {
   @override
   _InputPageState createState() => _InputPageState();
 }
 
 class _InputPageState extends State<InputPage> {
-  Color maleButtonColor = colorInactive;
-  Color femaleButtonColor = colorInactive;
-  void changeGender(int gender) {
-    if (gender == 1) {
-      maleButtonColor = colorActive;
-      femaleButtonColor = colorInactive;
-    } else {
-      maleButtonColor = colorInactive;
-      femaleButtonColor = colorActive;
-    }
-  }
+  Gender genderSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -43,11 +38,13 @@ class _InputPageState extends State<InputPage> {
                   child: GestureDetector(
                     onTap: () {
                       setState(() {
-                        changeGender(1);
+                        genderSelected = Gender.male;
                       });
                     },
                     child: ReusableCard(
-                      colour: maleButtonColor,
+                      colour: genderSelected == Gender.male
+                          ? colorActive
+                          : colorInactive,
                       cardChild: IconButtonWidget(
                         icon: FontAwesomeIcons.mars,
                         textButton: 'MALE',
@@ -59,11 +56,13 @@ class _InputPageState extends State<InputPage> {
                   child: GestureDetector(
                     onTap: () {
                       setState(() {
-                        changeGender(2);
+                        genderSelected = Gender.female;
                       });
                     },
                     child: ReusableCard(
-                      colour: femaleButtonColor,
+                      colour: genderSelected == Gender.female
+                          ? colorActive
+                          : colorInactive,
                       cardChild: IconButtonWidget(
                         icon: FontAwesomeIcons.venus,
                         textButton: 'FEMALE',
