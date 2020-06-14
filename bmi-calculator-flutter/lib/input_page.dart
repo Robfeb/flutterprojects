@@ -35,39 +35,35 @@ class _InputPageState extends State<InputPage> {
                 child: Row(
               children: <Widget>[
                 Expanded(
-                  child: GestureDetector(
-                    onTap: () {
+                  child: ReusableCard(
+                    colour: genderSelected == Gender.male
+                        ? colorActive
+                        : colorInactive,
+                    cardChild: IconButtonWidget(
+                      icon: FontAwesomeIcons.mars,
+                      textButton: 'MALE',
+                    ),
+                    onPress: () {
                       setState(() {
                         genderSelected = Gender.male;
                       });
                     },
-                    child: ReusableCard(
-                      colour: genderSelected == Gender.male
-                          ? colorActive
-                          : colorInactive,
-                      cardChild: IconButtonWidget(
-                        icon: FontAwesomeIcons.mars,
-                        textButton: 'MALE',
-                      ),
-                    ),
                   ),
                 ),
                 Expanded(
-                  child: GestureDetector(
-                    onTap: () {
+                  child: ReusableCard(
+                    colour: genderSelected == Gender.female
+                        ? colorActive
+                        : colorInactive,
+                    cardChild: IconButtonWidget(
+                      icon: FontAwesomeIcons.venus,
+                      textButton: 'FEMALE',
+                    ),
+                    onPress: () {
                       setState(() {
                         genderSelected = Gender.female;
                       });
                     },
-                    child: ReusableCard(
-                      colour: genderSelected == Gender.female
-                          ? colorActive
-                          : colorInactive,
-                      cardChild: IconButtonWidget(
-                        icon: FontAwesomeIcons.venus,
-                        textButton: 'FEMALE',
-                      ),
-                    ),
                   ),
                 ),
               ],
