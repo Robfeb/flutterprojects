@@ -1,12 +1,15 @@
-import 'package:bmi_calculator/results_page.dart';
-import 'package:bmi_calculator/reusable_card.dart';
+import 'package:bmi_calculator/calculator_brain.dart';
+import 'package:bmi_calculator/components/round_icon_button.dart';
+
+import 'results_page.dart';
+import 'package:bmi_calculator/components/reusable_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'bottom_button.dart';
-import 'constants.dart';
-import 'icon_button.dart';
+import '../components/bottom_button.dart';
+import '../constants.dart';
+import '../components/icon_button.dart';
 
 enum Gender {
   male,
@@ -211,34 +214,21 @@ class _InputPageState extends State<InputPage> {
             BottomButton(
               text: 'CALCULATE',
               onTapAction: () {
+                CalculatorBrain calc = CalculatorBrain(
+                    height: heightSelected, weight: weightSelected);
+                calc.calculateBMI();
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => ResultsPage(),
+                      builder: (context) => ResultsPage(
+                        bmiResult: calc.getBmi(),
+                        resultText: calc.getResult(),
+                        interpretation: calc.getInterpretation(),
+                      ),
                     ));
               },
             ),
           ],
         ));
-  }
-}
-
-class RoundIconButton extends StatelessWidget {
-  RoundIconButton({this.icon, this.onPressAction});
-  final IconData icon;
-  final Function onPressAction;
-  @override
-  Widget build(BuildContext context) {
-    return RawMaterialButton(
-      child: Icon(icon),
-      elevation: 0.0,
-      onPressed: onPressAction,
-      shape: CircleBorder(),
-      fillColor: kButtonColor,
-      constraints: BoxConstraints.tightFor(
-        width: 56.0,
-        height: 56.0,
-      ),
-    );
   }
 }
