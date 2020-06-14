@@ -1,13 +1,12 @@
 import 'package:flutter/cupertino.dart';
 
+import 'constants.dart';
+
 class IconButtonWidget extends StatelessWidget {
   IconButtonWidget({this.icon, this.textButton});
   final IconData icon;
   final String textButton;
-  final TextStyle textStyleButton = TextStyle(
-    fontSize: 18,
-    color: Color(0xFF8D8E98),
-  );
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -22,7 +21,7 @@ class IconButtonWidget extends StatelessWidget {
         ),
         Text(
           textButton,
-          style: textStyleButton,
+          style: kTextStyleButton,
         )
       ],
     );
