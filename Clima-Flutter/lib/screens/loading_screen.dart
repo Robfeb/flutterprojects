@@ -4,7 +4,7 @@ import '../services/networking.dart';
 import 'location_screen.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-const String kApiKey = '<api>';
+const String kApiKey = '<api>>';
 
 class LoadingScreen extends StatefulWidget {
   @override
@@ -23,8 +23,8 @@ class _LoadingScreenState extends State<LoadingScreen> {
   void getLocation() async {
     Location location = Location();
     await location.getCurrentLocation();
-    var latitude = location.longitude;
-    var longitude = location.latitude;
+    var latitude = location.latitude;
+    var longitude = location.longitude;
     var url =
         'https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$kApiKey&units=metric';
     var sampleUrl =
