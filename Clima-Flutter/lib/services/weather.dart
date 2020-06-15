@@ -1,3 +1,5 @@
+import 'package:clima/utilities/constants.dart';
+
 class WeatherModel {
   String getWeatherIcon(int condition) {
     if (condition < 300) {

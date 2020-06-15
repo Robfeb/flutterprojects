@@ -1,12 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:clima/utilities/constants.dart';
+import '../services/weather.dart';
 
 class LocationScreen extends StatefulWidget {
+  final locationWeather;
+  LocationScreen({this.locationWeather});
+
   @override
   _LocationScreenState createState() => _LocationScreenState();
 }
 
 class _LocationScreenState extends State<LocationScreen> {
+  WeatherModel weather = WeatherModel();
+  int temperature;
+  String weatherIcon;
+  String cityName;
+  String weatherInfo;
+
+  @override
+  void initState() {
+    super.initState();
+    print(widget.locationWeather);
+    updateUI(widget.locationWeather);
+  }
+
+  void updateUI(dynamic weatherData) {
+    if (weatherData == null) return;
+    var temp = weatherData['main']['temp'];
+    //ONLY FOR TESTING SAMPLE DATA
+    if (temp > 100) temp = (temp / 50) + 10;
+    temperature = temp.toInt();
+    var condition = weatherData['weather'][0]['id'];
+    weatherIcon = weather.getWeatherIcon(condition);
+    cityName = weatherData['name'];
+    weatherInfo = weather.getMessage(temperature);
+    print(temperature);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,11 +79,11 @@ class _LocationScreenState extends State<LocationScreen> {
                 child: Row(
                   children: <Widget>[
                     Text(
-                      '32°',
+                      '$temperatureº',
                       style: kTempTextStyle,
                     ),
                     Text(
-                      '☀️',
+                      '$weatherIcon',
                       style: kConditionTextStyle,
                     ),
                   ],
@@ -62,7 +92,7 @@ class _LocationScreenState extends State<LocationScreen> {
               Padding(
                 padding: EdgeInsets.only(right: 15.0),
                 child: Text(
-                  "It's 🍦 time in San Francisco!",
+                  "$weatherInfo in $cityName!",
                   textAlign: TextAlign.right,
                   style: kMessageTextStyle,
                 ),
