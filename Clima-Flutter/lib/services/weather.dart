@@ -1,13 +1,19 @@
-import 'package:clima/utilities/constants.dart';
-
 import 'location.dart';
 import 'networking.dart';
 
-//const String kApiKey = '<api>>';
-const String kApiKey = '<apikey>';
+const String kApiKey = 'b00ce6780e664c7a4ceddbae862d1816';
 const String kWeatherUrl = 'https://api.openweathermap.org/data/2.5/weather';
 
 class WeatherModel {
+  Future<dynamic> getLocationDataByCityName(String cityName) async {
+    var url = kWeatherUrl + '?q=$cityName&appid=$kApiKey&units=metric';
+
+    print(url);
+    NetworkHelper networkHelper = NetworkHelper(url: url);
+    var weatherData = await networkHelper.getData();
+    return weatherData;
+  }
+
   Future<dynamic> getLocationData() async {
     Location location = Location();
     await location.getCurrentLocation();
