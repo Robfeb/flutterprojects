@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 import 'package:todolistflutter/models/task.dart';
+import 'package:todolistflutter/models/task_data.dart';
 import 'package:todolistflutter/widgets/task_tile.dart';
 
 class TaskList extends StatefulWidget {
@@ -8,26 +10,25 @@ class TaskList extends StatefulWidget {
 }
 
 class _TaskListState extends State<TaskList> {
-  List<Task> tasks = [
-    Task(name: 'Buy milk'),
-    Task(name: 'Buy eggs'),
-    Task(name: 'Buy flour'),
-  ];
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemBuilder: (context, index) {
-        return TaskTile(
-          taskTitle: tasks[index].name,
-          isChecked: tasks[index].isDone,
-          checkboxCallback: (value) {
-            setState(() {
-              tasks[index].toggleDone();
-            });
+    return Consumer<TaskData>(
+      builder: (context, taskData, child) {
+        return ListView.builder(
+          itemBuilder: (context, index) {
+            return TaskTile(
+              taskTitle: taskData.tasks[index].name,
+              isChecked: taskData.tasks[index].isDone,
+              checkboxCallback: (value) {
+                setState(() {
+                  taskData.tasks[index].toggleDone();
+                });
+              },
+            );
           },
+          itemCount: taskData.taskCount,
         );
       },
-      itemCount: tasks.length,
     );
   }
 }

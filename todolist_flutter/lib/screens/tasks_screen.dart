@@ -1,15 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:todolistflutter/widgets/task_list.dart';
-
+import 'package:provider/provider.dart';
+import '../models/task_data.dart';
 import 'AddTaskScreen.dart';
 
-class TaskScreen extends StatefulWidget {
-  @override
-  _TaskScreenState createState() => _TaskScreenState();
-}
-
-class _TaskScreenState extends State<TaskScreen> {
+class TaskScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,13 +15,7 @@ class _TaskScreenState extends State<TaskScreen> {
         onPressed: () {
           showModalBottomSheet(
             context: context,
-            isScrollControlled: true,
-            builder: (context) => SingleChildScrollView(
-                child: Container(
-              padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).viewInsets.bottom),
-              child: AddTaskScreen(),
-            )),
+            builder: (context) => AddTaskScreen(),
           );
         },
       ),
@@ -59,7 +49,7 @@ class _TaskScreenState extends State<TaskScreen> {
                         fontWeight: FontWeight.w700),
                   ),
                   Text(
-                    '12 Tasks',
+                    '${Provider.of<TaskData>(context).taskCount} Tasks',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 18,
