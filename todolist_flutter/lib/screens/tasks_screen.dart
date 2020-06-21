@@ -2,17 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:todolistflutter/widgets/task_list.dart';
 
+import 'AddTaskScreen.dart';
+
 class TaskScreen extends StatefulWidget {
   @override
   _TaskScreenState createState() => _TaskScreenState();
-}
-
-Widget buildButtonSheet(BuildContext context) {
-  return Container(
-    child: Center(
-      child: Text('Hola elena !!!!!'),
-    ),
-  );
 }
 
 class _TaskScreenState extends State<TaskScreen> {
@@ -23,7 +17,16 @@ class _TaskScreenState extends State<TaskScreen> {
         backgroundColor: Colors.lightBlueAccent,
         child: Icon(Icons.add),
         onPressed: () {
-          showModalBottomSheet(context: context, builder: buildButtonSheet);
+          showModalBottomSheet(
+            context: context,
+            isScrollControlled: true,
+            builder: (context) => SingleChildScrollView(
+                child: Container(
+              padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom),
+              child: AddTaskScreen(),
+            )),
+          );
         },
       ),
       backgroundColor: Colors.lightBlueAccent,
