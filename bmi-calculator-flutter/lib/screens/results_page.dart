@@ -10,7 +10,13 @@ class ResultsPage extends StatelessWidget {
   final String bmiResult;
   final String resultText;
   final String interpretation;
-  ResultsPage({this.interpretation, this.bmiResult, this.resultText});
+
+  const ResultsPage({
+    super.key,
+    required this.interpretation,
+    required this.bmiResult,
+    required this.resultText,
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -19,8 +19,7 @@ class WeatherModel {
     await location.getCurrentLocation();
     var latitude = location.latitude;
     var longitude = location.longitude;
-    var url = kWeatherUrl +
-        '?lat=$latitude&lon=$longitude&appid=$kApiKey&units=metric';
+    var url = '$kWeatherUrl?lat=$latitude&lon=$longitude&appid=$kApiKey&units=metric';
 
     print(url);
     NetworkHelper networkHelper = NetworkHelper(url: url);

@@ -13,41 +13,31 @@ class WelcomeScreen extends StatefulWidget {
 
 class _WelcomeScreenState extends State<WelcomeScreen>
     with SingleTickerProviderStateMixin {
-  AnimationController controller;
-  Animation animation;
+  late AnimationController controller;
+  late Animation animation;
   @override
   void initState() {
     super.initState();
 
     controller = AnimationController(
-      duration: Duration(seconds: 5),
+      duration: const Duration(seconds: 1),
       vsync: this,
     );
 
+    animation = ColorTween(begin: Colors.blueGrey, end: Colors.white)
+        .animate(controller);
+
     controller.forward();
-    animation =
-        ColorTween(begin: Colors.red, end: Colors.blue).animate(controller);
-    /*
-     animation = CurvedAnimation(
-      parent: controller,
-      curve: Curves.decelerate,
-    );
-    animation.addStatusListener((status) {
-      if (status == AnimationStatus.completed)
-        controller.reverse(from: 1.0);
-      else if (status == AnimationStatus.dismissed) controller.forward();
-    });*/
+
     controller.addListener(() {
       setState(() {});
-      print(controller.value);
     });
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
-    super.dispose();
     controller.dispose();
+    super.dispose();
   }
 
   void goToPage(String id) {
@@ -59,7 +49,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
     return Scaffold(
       backgroundColor: animation.value,
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 24.0),
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -68,17 +58,22 @@ class _WelcomeScreenState extends State<WelcomeScreen>
               children: <Widget>[
                 Hero(
                   tag: 'logo',
-                  child: Container(
-                    child: Image.asset('images/logo.png'),
+                  child: SizedBox(
                     height: 60.0,
+                    child: Image.asset('images/logo.png'),
                   ),
                 ),
-                TypewriterAnimatedTextKit(
-                  text: ['Flash Chat'],
-                  textStyle: TextStyle(
-                    fontSize: 40.0,
-                    fontWeight: FontWeight.w900,
-                  ),
+                AnimatedTextKit(
+                  animatedTexts: [
+                    TypewriterAnimatedText(
+                      'Flash Chat',
+                      textStyle: const TextStyle(
+                        fontSize: 45.0,
+                        fontWeight: FontWeight.w900,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),

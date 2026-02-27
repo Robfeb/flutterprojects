@@ -51,39 +51,45 @@ class _StoryPageState extends State<StoryPage> {
               ),
               Expanded(
                 flex: 2,
-                child: FlatButton(
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    backgroundColor: Colors.red,
+                    foregroundColor: Colors.white,
+                  ),
                   onPressed: () {
                     //Choice 1 made by user.
                     setState(() {
                       storyBrain.nextStory(1);
                     });
                   },
-                  color: Colors.red,
                   child: Text(
                     storyBrain.getChoice1(),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 20.0,
                     ),
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20.0,
               ),
               Expanded(
                 flex: 2,
                 child: Visibility(
                   visible: storyBrain.buttonShouldBeVisible(),
-                  child: FlatButton(
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      backgroundColor: Colors.blue,
+                      foregroundColor: Colors.white,
+                    ),
                     onPressed: () {
                       setState(() {
                         storyBrain.nextStory(2);
                       });
                     },
-                    color: Colors.blue,
                     child: Text(
                       storyBrain.getChoice2(),
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 20.0,
                       ),
                     ),

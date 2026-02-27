@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../constants.dart';
 import 'chat_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class RegistrationScreen extends StatefulWidget {
   static const String Id = 'registration_screen';
@@ -15,8 +15,8 @@ class RegistrationScreen extends StatefulWidget {
 class _RegistrationScreenState extends State<RegistrationScreen> {
   bool showSpinner = false;
   final _auth = FirebaseAuth.instance;
-  String username;
-  String password;
+  late String username;
+  late String password;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

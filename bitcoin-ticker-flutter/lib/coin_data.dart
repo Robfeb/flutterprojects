@@ -34,20 +34,18 @@ const List<String> cryptoList = [
 ];
 
 class CoinData {
-  Future getCoinData(String currency) async {
+  Future<Map<String, String>> getCoinData(String currency) async {
     Map<String, String> cryptoPrices = {};
     for (String crypto in cryptoList) {
-      var url = '$kCoinApiUrl/$crypto/$currency?apikey=$kApiKey';
-      var rate;
-      var response = await http.get(url);
+      String requestURL = '$kCoinApiUrl/$crypto/$currency?apikey=$kApiKey';
+      http.Response response = await http.get(Uri.parse(requestURL));
       if (response.statusCode == 200) {
-        print(response.body);
-        var jsonResponse = convert.jsonDecode(response.body);
-        rate = jsonResponse['rate'];
-        cryptoPrices[crypto] = rate.toStringAsFixed(0);
-        print(rate);
+        var decodedData = convert.jsonDecode(response.body);
+        double lastPrice = decodedData['rate'];
+        cryptoPrices[crypto] = lastPrice.toStringAsFixed(0);
       } else {
-        print('Request failed with status: ${response.statusCode}.');
+        print(response.statusCode);
+        throw 'Problem with the get request';
       }
     }
     return cryptoPrices;

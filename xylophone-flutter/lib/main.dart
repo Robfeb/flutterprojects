@@ -1,32 +1,24 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:audioplayers/audio_cache.dart';
 import 'package:audioplayers/audioplayers.dart';
 
-void main() => runApp(XylophoneApp());
-
-class NoteScreen {
-  int note() {}
-  Color color() {}
-  String text() {}
-}
+void main() => runApp(const XylophoneApp());
 
 class XylophoneApp extends StatelessWidget {
-  void playSound(int note) {
-    void audioPlayerHandler(AudioPlayerState value) => print('state => $value');
-    final player = AudioCache();
-    final AudioPlayer audioPlayer = AudioPlayer();
-    if (Platform.isIOS) {
-      audioPlayer.monitorNotificationStateChanges(audioPlayerHandler);
-    }
-    player.play('note$note.wav');
-    player.clearCache();
+  const XylophoneApp({super.key});
+
+  void playSound(int note) async {
+    final player = AudioPlayer();
+    await player.play(AssetSource('note$note.wav'));
   }
 
   Expanded buildKey(int note, Color color, String text) {
     return Expanded(
-      child: FlatButton(
-        color: color,
+      child: TextButton(
+        style: TextButton.styleFrom(
+          backgroundColor: color,
+          foregroundColor: Colors.white,
+          shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+        ),
         onPressed: () {
           playSound(note);
         },

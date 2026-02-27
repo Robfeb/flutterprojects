@@ -7,7 +7,7 @@ class CityScreen extends StatefulWidget {
 }
 
 class _CityScreenState extends State<CityScreen> {
-  String cityName;
+  String? cityName;
 
   @override
   Widget build(BuildContext context) {
@@ -25,13 +25,16 @@ class _CityScreenState extends State<CityScreen> {
             children: <Widget>[
               Align(
                 alignment: Alignment.topLeft,
-                child: FlatButton(
+              Align(
+                alignment: Alignment.topLeft,
+                child: TextButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Icon(
+                  child: const Icon(
                     Icons.arrow_back_ios,
                     size: 50.0,
+                    color: Colors.white,
                   ),
                 ),
               ),
@@ -53,13 +56,14 @@ class _CityScreenState extends State<CityScreen> {
                   },
                 ),
               ),
-              FlatButton(
+              TextButton(
                 onPressed: () {
                   Navigator.pop(context, cityName);
                 },
-                child: Text(
+                child: const Text(
                   'Get Weather',
                   style: kButtonTextStyle,
+                  color: Colors.white,
                 ),
               ),
             ],
