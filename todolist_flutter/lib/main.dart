@@ -8,11 +8,13 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      builder: (context) => TaskData(),
-      child: MaterialApp(
+      create: (context) => TaskData(),
+      child: const MaterialApp(
         home: TaskScreen(),
       ),
     );

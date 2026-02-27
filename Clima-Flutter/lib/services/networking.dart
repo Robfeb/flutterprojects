@@ -3,10 +3,10 @@ import 'dart:convert';
 
 class NetworkHelper {
   final String url;
-  NetworkHelper({this.url});
+  NetworkHelper({required this.url});
 
   Future getData() async {
-    var response = await get(url);
+    var response = await get(Uri.parse(url));
     if (response.statusCode == 200) {
       print(response.body);
       return jsonDecode(response.body);

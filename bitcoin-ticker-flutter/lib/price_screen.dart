@@ -19,8 +19,8 @@ class _PriceScreenState extends State<PriceScreen> {
     for (String currency in currenciesList) {
       menuList.add(
         DropdownMenuItem(
-          child: Text(currency),
           value: currency,
+          child: Text(currency),
         ),
       );
     }
@@ -29,7 +29,7 @@ class _PriceScreenState extends State<PriceScreen> {
       items: menuList,
       onChanged: (value) {
         setState(() {
-          selectedCurrency = value;
+          selectedCurrency = value!;
           getData();
         });
       },
@@ -123,14 +123,13 @@ class _PriceScreenState extends State<PriceScreen> {
 }
 
 class CryptoCard extends StatelessWidget {
-  //2: You'll need to able to pass the selectedCurrency, value and cryptoCurrency to the constructor of this CryptoCard Widget.
-  const CryptoCard({
-    this.value,
-    this.selectedCurrency,
-    this.cryptoCurrency,
+  const CryptoCard({super.key, 
+    required this.value,
+    required this.selectedCurrency,
+    required this.cryptoCurrency,
   });
 
-  final String value;
+  final String? value;
   final String selectedCurrency;
   final String cryptoCurrency;
 

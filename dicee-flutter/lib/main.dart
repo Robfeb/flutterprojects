@@ -43,7 +43,7 @@ class _DicePageState extends State<DicePage> {
       child: Row(
         children: <Widget>[
           Expanded(
-            child: FlatButton(
+            child: TextButton(
               onPressed: () {
                 changeLeftDice();
               },
@@ -51,7 +51,7 @@ class _DicePageState extends State<DicePage> {
             ),
           ),
           Expanded(
-            child: FlatButton(
+            child: TextButton(
               onPressed: () {
                 changeRightDice();
               },

@@ -11,13 +11,20 @@ class TaskScreen extends StatelessWidget {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.lightBlueAccent,
-        child: Icon(Icons.add),
         onPressed: () {
           showModalBottomSheet(
             context: context,
-            builder: (context) => AddTaskScreen(),
+            isScrollControlled: true,
+            builder: (context) => SingleChildScrollView(
+              child: Container(
+                padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom),
+                child: const AddTaskScreen(),
+              ),
+            ),
           );
         },
+        child: const Icon(Icons.add),
       ),
       backgroundColor: Colors.lightBlueAccent,
       body: Column(
@@ -50,7 +57,7 @@ class TaskScreen extends StatelessWidget {
                   ),
                   Text(
                     '${Provider.of<TaskData>(context).taskCount} Tasks',
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.white,
                       fontSize: 18,
                     ),

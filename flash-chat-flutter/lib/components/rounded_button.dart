@@ -2,10 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class RoundedButton extends StatelessWidget {
+  const RoundedButton({super.key, required this.color, required this.text, required this.action});
+
   final Color color;
   final String text;
-  final Function action;
-  RoundedButton({this.color, this.text, @required this.action});
+  final void Function() action;
   @override
   Widget build(BuildContext context) {
     return Padding(

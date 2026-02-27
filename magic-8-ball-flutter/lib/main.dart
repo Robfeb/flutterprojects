@@ -34,7 +34,7 @@ class _EightBallPageState extends State<EightBallPage> {
       child: Row(
         children: <Widget>[
           Expanded(
-            child: FlatButton(
+            child: TextButton(
               onPressed: () {
                 changeLeftDice();
               },

@@ -4,8 +4,8 @@ import '../services/weather.dart';
 import 'city_screen.dart';
 
 class LocationScreen extends StatefulWidget {
-  final locationWeather;
-  LocationScreen({this.locationWeather});
+  final dynamic locationWeather;
+  const LocationScreen({super.key, this.locationWeather});
 
   @override
   _LocationScreenState createState() => _LocationScreenState();
@@ -13,10 +13,10 @@ class LocationScreen extends StatefulWidget {
 
 class _LocationScreenState extends State<LocationScreen> {
   WeatherModel weather = WeatherModel();
-  int temperature;
-  String weatherIcon;
-  String cityName;
-  String weatherInfo;
+  late int temperature;
+  late String weatherIcon;
+  late String cityName;
+  late String weatherInfo;
 
   @override
   void initState() {
@@ -65,17 +65,18 @@ class _LocationScreenState extends State<LocationScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  FlatButton(
+                  TextButton(
                     onPressed: () async {
                       var weatherData = await weather.getLocationData();
                       updateUI(weatherData);
                     },
-                    child: Icon(
+                    child: const Icon(
                       Icons.near_me,
                       size: 50.0,
+                      color: Colors.white,
                     ),
                   ),
-                  FlatButton(
+                  TextButton(
                     onPressed: () async {
                       var typedCity = await Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
@@ -88,9 +89,10 @@ class _LocationScreenState extends State<LocationScreen> {
                       }
                       print(typedCity);
                     },
-                    child: Icon(
+                    child: const Icon(
                       Icons.location_city,
                       size: 50.0,
+                      color: Colors.white,
                     ),
                   ),
                 ],

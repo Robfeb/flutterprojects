@@ -1,13 +1,15 @@
 class Story {
-  String storyTitle;
-  String choice1;
-  String choice2;
-  int nextStoryIfChoice1;
-  int nextStoryIfChoice2;
-  Story(
-      {this.storyTitle,
-      this.choice1,
-      this.choice2,
-      this.nextStoryIfChoice1,
-      this.nextStoryIfChoice2});
+  final String storyTitle;
+  final String choice1;
+  final String choice2;
+  final int nextStoryIfChoice1;
+  final int nextStoryIfChoice2;
+
+  Story({
+    required this.storyTitle,
+    required this.choice1,
+    required this.choice2,
+    required this.nextStoryIfChoice1,
+    required this.nextStoryIfChoice2,
+  });
 }

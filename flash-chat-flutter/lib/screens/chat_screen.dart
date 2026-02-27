@@ -1,10 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:flash_chat/constants.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-
-Firestore _firestore = Firestore.instance;
-FirebaseUser loggedInUser;
+final _firestore = FirebaseFirestore.instance;
+User? loggedInUser;
 
 class ChatScreen extends StatefulWidget {
   static const String Id = 'chat_screen';
@@ -18,12 +13,12 @@ class _ChatScreenState extends State<ChatScreen> {
   final messageTextController = TextEditingController();
   final _auth = FirebaseAuth.instance;
 
-  void getCurrentUser() async {
+  void getCurrentUser() {
     try {
-      var user = await _auth.currentUser();
+      final user = _auth.currentUser;
       if (user != null) {
         loggedInUser = user;
-        print(loggedInUser.email);
+        print(loggedInUser!.email);
       }
     } catch (e) {
       print(e);
@@ -88,15 +83,15 @@ class _ChatScreenState extends State<ChatScreen> {
                       decoration: kMessageTextFieldDecoration,
                     ),
                   ),
-                  FlatButton(
+                  TextButton(
                     onPressed: () {
                       _firestore.collection('messages').add({
-                        'user': loggedInUser.email,
+                        'user': loggedInUser!.email,
                         'msg': messageText,
                       });
                       messageTextController.clear();
                     },
-                    child: Text(
+                    child: const Text(
                       'Send',
                       style: kSendButtonTextStyle,
                     ),
@@ -124,15 +119,16 @@ class MessageStream extends StatelessWidget {
             ),
           );
         }
-        final _messages = snapshot.data.documents;
+        final _messages = snapshot.data!.docs;
         List<MessageBubble> messageBubbles = [];
         for (var message in _messages) {
-          final messageText = message.data['msg'];
-          final messageUser = message.data['user'];
+          final messageData = message.data() as Map<String, dynamic>;
+          final messageText = messageData['msg'];
+          final messageUser = messageData['user'];
           final messageBubble = MessageBubble(
             message: messageText,
             userSender: messageUser,
-            isMe: loggedInUser.email == messageUser,
+            isMe: loggedInUser?.email == messageUser,
           );
           messageBubbles.add(messageBubble);
         }
@@ -155,7 +151,7 @@ class MessageBubble extends StatelessWidget {
   final String message;
   final String userSender;
   final bool isMe;
-  MessageBubble({this.message, this.userSender, this.isMe});
+  const MessageBubble({super.key, required this.message, required this.userSender, required this.isMe});
   @override
   Widget build(BuildContext context) {
     return Padding(
