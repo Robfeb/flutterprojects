@@ -24,6 +24,8 @@ const kLargeTextButton = TextStyle(
   fontSize: 25.0,
   fontWeight: FontWeight.bold,
 );
+const kLargeButtonTextStyle = kLargeTextButton;
+const kBottomContainerHeight = 80.0;
 const kTextResultStyle = TextStyle(
   fontSize: 22,
   fontWeight: FontWeight.bold,

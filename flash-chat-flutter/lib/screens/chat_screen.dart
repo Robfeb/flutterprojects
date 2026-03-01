@@ -1,3 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flash_chat/constants.dart';
+import 'package:flutter/material.dart';
+
 final _firestore = FirebaseFirestore.instance;
 User? loggedInUser;
 
@@ -9,7 +14,7 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  String messageText;
+  late String messageText;
   final messageTextController = TextEditingController();
   final _auth = FirebaseAuth.instance;
 
@@ -151,7 +156,11 @@ class MessageBubble extends StatelessWidget {
   final String message;
   final String userSender;
   final bool isMe;
-  const MessageBubble({super.key, required this.message, required this.userSender, required this.isMe});
+  const MessageBubble(
+      {super.key,
+      required this.message,
+      required this.userSender,
+      required this.isMe});
   @override
   Widget build(BuildContext context) {
     return Padding(

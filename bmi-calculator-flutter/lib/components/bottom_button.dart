@@ -3,9 +3,9 @@ import 'package:flutter/cupertino.dart';
 import '../constants.dart';
 
 class BottomButton extends StatelessWidget {
-  final Function onTapAction;
+  final void Function() onTapAction;
   final String text;
-  BottomButton({this.text, this.onTapAction});
+  BottomButton({required this.text, required this.onTapAction});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

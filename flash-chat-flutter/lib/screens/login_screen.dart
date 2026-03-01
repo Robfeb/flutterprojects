@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flash_chat/components/rounded_button.dart';
 import 'package:flash_chat/screens/chat_screen.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +14,6 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool showSpinner = false;
-  final _auth = FirebaseAuth.instance;
   late String username;
   late String password;
   @override
@@ -74,11 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       showSpinner = true;
                     });
                     try {
-                      final _user = await _auth.signInWithEmailAndPassword(
-                          email: username, password: password);
-                      if (_user != null) {
-                        Navigator.pushNamed(context, ChatScreen.Id);
-                      }
+                      Navigator.pushNamed(context, ChatScreen.Id);
                       setState(() {
                         showSpinner = false;
                       });

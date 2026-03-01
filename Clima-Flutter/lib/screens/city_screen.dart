@@ -25,8 +25,6 @@ class _CityScreenState extends State<CityScreen> {
             children: <Widget>[
               Align(
                 alignment: Alignment.topLeft,
-              Align(
-                alignment: Alignment.topLeft,
                 child: TextButton(
                   onPressed: () {
                     Navigator.pop(context);
@@ -63,7 +61,6 @@ class _CityScreenState extends State<CityScreen> {
                 child: const Text(
                   'Get Weather',
                   style: kButtonTextStyle,
-                  color: Colors.white,
                 ),
               ),
             ],
