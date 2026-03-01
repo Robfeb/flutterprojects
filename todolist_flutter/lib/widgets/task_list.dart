@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
-import 'package:todolistflutter/models/task.dart';
 import 'package:todolistflutter/models/task_data.dart';
 import 'package:todolistflutter/widgets/task_tile.dart';
 
